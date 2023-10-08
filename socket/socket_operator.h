@@ -54,4 +54,8 @@ ret_val socket_server_listen(socket_server_operator *opr, int port,
 
 ssize_t socket_recv(socket_info *info, void *buf, ssize_t len);
 
+ret_val socket_client_close(socket_client_operator *opr);
+
+ret_val socket_server_close(socket_server_operator *opr);
+
 #endif // !__SOCKET_OPERATOR_H_
