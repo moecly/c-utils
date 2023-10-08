@@ -6,10 +6,6 @@
 #include <string.h>
 #include <unistd.h>
 
-static ssize_t socket_send(socket_info *info, const void *buf, ssize_t len) {
-  return send(info->sockfd, buf, len, 0);
-}
-
 static ret_val socket_client_connect_handler(socket_client_operator *opr,
                                              char *ip_addr, int port) {
   struct sockaddr_in *addr = &opr->client_info.sockaddr;
@@ -26,11 +22,6 @@ static ret_val socket_client_connect_handler(socket_client_operator *opr,
   }
 
   return ret_ok;
-}
-
-static ssize_t socket_client_send_handler(socket_client_operator *opr,
-                                          const void *buf, ssize_t len) {
-  return socket_send(&opr->client_info, buf, len);
 }
 
 static ret_val socket_server_listen_handler(socket_server_operator *opr,
@@ -93,11 +84,6 @@ static ret_val socket_server_accept_block_handler(socket_server_operator *opr,
   return ret_ok;
 }
 
-static ssize_t socket_server_send_handler(socket_server_operator *opr,
-                                          const void *buf, ssize_t len) {
-  return socket_send(&opr->server_info, buf, len);
-}
-
 static ret_val socket_create(socket_info *info) {
   info->sockfd = socket(AF_INET, SOCK_STREAM, 0);
   if (info->sockfd == -1)
@@ -114,14 +100,12 @@ static ret_val socket_close(socket_info *info) {
 
 ret_val socket_client_init(socket_client_operator *opr) {
   opr->connect = socket_client_connect_handler;
-  opr->send = socket_client_send_handler;
   return socket_create(&opr->client_info);
 }
 
 ret_val socket_server_init(socket_server_operator *opr) {
   opr->accept_block = socket_server_accept_block_handler;
   opr->accept_unblock = socket_server_accept_unblock_handler;
-  opr->send = socket_server_send_handler;
   opr->listen = socket_server_listen_handler;
   return socket_create(&opr->server_info);
 }
@@ -129,11 +113,6 @@ ret_val socket_server_init(socket_server_operator *opr) {
 ret_val socket_client_connect(socket_client_operator *opr, char *ip_addr,
                               int port) {
   return opr->connect(opr, ip_addr, port);
-}
-
-ret_val socket_client_send(socket_client_operator *opr, const void *buf,
-                           ssize_t len) {
-  return opr->send(opr, buf, len);
 }
 
 ret_val socket_client_close(socket_client_operator *opr) {
@@ -150,20 +129,19 @@ ret_val socket_server_accept_unblock(socket_server_operator *opr,
   return opr->accept_unblock(opr, info);
 }
 
-ret_val socket_server_send(socket_server_operator *opr, const void *buf,
-                           ssize_t len) {
-  return opr->send(opr, buf, len);
-}
-
 ret_val socket_server_listen(socket_server_operator *opr, int port,
                              int max_conn_num) {
   return opr->listen(opr, port, max_conn_num);
+}
+
+ret_val socket_server_close(socket_server_operator *opr) {
+  return socket_close(&opr->server_info);
 }
 
 ssize_t socket_recv(socket_info *info, void *buf, ssize_t len) {
   return recv(info->sockfd, buf, len, 0);
 }
 
-ret_val socket_server_close(socket_server_operator *opr) {
-  return socket_close(&opr->server_info);
+ssize_t socket_send(socket_info *info, const void *buf, ssize_t len) {
+  return send(info->sockfd, buf, len, 0);
 }
