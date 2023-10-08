@@ -1,7 +1,7 @@
 #ifndef __SOCKET_OPERATOR_H_
 #define __SOCKET_OPERATOR_H_
 
-#include "c-utils/common/common.h"
+#include "c-utils/c-utils.h"
 #include <arpa/inet.h>
 
 typedef struct {
