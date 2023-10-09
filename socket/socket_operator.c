@@ -287,8 +287,23 @@ ret_val socket_server_close(socket_server_operator *opr) {
  * @param len Maximum length of data to receive.
  * @return Returns the number of bytes received on success, or -1 on failure.
  */
-ssize_t socket_recv(socket_info *info, void *buf, ssize_t len) {
+ssize_t socket_recv_block(socket_info *info, void *buf, ssize_t len) {
   return recv(info->sockfd, buf, len, 0);
+}
+
+/**
+ * @brief Receives data from a socket.
+ *
+ * This function receives data from a socket and stores it in the provided
+ * buffer.
+ *
+ * @param info Pointer to the socket_info structure.
+ * @param buf Pointer to the buffer to store received data.
+ * @param len Maximum length of data to receive.
+ * @return Returns the number of bytes received on success, or -1 on failure.
+ */
+ssize_t socket_recv_unblock(socket_info *info, void *buf, ssize_t len) {
+  return recv(info->sockfd, buf, len, MSG_DONTWAIT);
 }
 
 /**
@@ -301,6 +316,20 @@ ssize_t socket_recv(socket_info *info, void *buf, ssize_t len) {
  * @param len Length of the data to send.
  * @return Returns the number of bytes sent on success, or -1 on failure.
  */
-ssize_t socket_send(socket_info *info, const void *buf, ssize_t len) {
+ssize_t socket_send_block(socket_info *info, const void *buf, ssize_t len) {
   return send(info->sockfd, buf, len, 0);
+}
+
+/**
+ * @brief Sends data through a socket.
+ *
+ * This function sends data through a socket.
+ *
+ * @param info Pointer to the socket_info structure.
+ * @param buf Pointer to the data to send.
+ * @param len Length of the data to send.
+ * @return Returns the number of bytes sent on success, or -1 on failure.
+ */
+ssize_t socket_send_unblock(socket_info *info, const void *buf, ssize_t len) {
+  return send(info->sockfd, buf, len, MSG_DONTWAIT);
 }
