@@ -163,7 +163,7 @@ ret_val process_exit(process_opr *opr) { return opr->exit(opr); }
  * @param options Additional wait options.
  */
 void process_wait(process_opr *opr, int *status, int options) {
-  if (validate_pointer(opr) == ret_err)
+  if (validate_pointer(opr) == ret_null_pointer)
     wait(status);
   else
     waitpid(opr->info.pid, status, options);
