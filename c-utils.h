@@ -14,31 +14,35 @@ extern "C" {
 #include "utils-configs.h"
 
 #ifdef USE_COMMON
-#include "common/common.h" /* 引用通用功能模块 */
+#include "common/inc/common.h" /* 引用通用功能模块 */
 #endif
 
 #ifdef USE_LIST
-#include "list/list.h" /* 引用链表数据结构模块 */
+#include "list/inc/list.h" /* 引用链表数据结构模块 */
 #endif
 
 #ifdef USE_LOG_MSG
-#include "log_msg/log_msg.h" /* 引用日志消息模块 */
+#include "log_msg/inc/log_msg.h" /* 引用日志消息模块 */
 #endif
 
 #ifdef USE_STR_UTIL
-#include "str_util/str_util.h" /* 引用字符串处理工具模块 */
+#include "str_util/inc/str_util.h" /* 引用字符串处理工具模块 */
 #endif
 
 #ifdef USE_SYS_TIME
-#include "sys_time/sys_time.h" /* 引用系统时间模块 */
+#include "sys_time/inc/sys_time.h" /* 引用系统时间模块 */
 #endif
 
 #ifdef USE_PROCESS
-#include "process/process_operator.h" /* 引用进程管理者模块 */
+#include "process/inc/process_operator.h" /* 引用进程管理者模块 */
 #endif
 
 #ifdef USE_SOCKET
-#include "socket/socket_operator.h" /* 引用进程管理者模块 */
+#include "socket/inc/socket_operator.h" /* 引用进程管理者模块 */
+#endif
+
+#ifdef USE_CRYPTO
+#include "crypto/inc/crypto_operator.h" /* 引用进程管理者模块 */
 #endif
 
 #ifdef __cplusplus

@@ -7,7 +7,6 @@
 #ifndef __LIST_H_
 #define __LIST_H_
 
-#include "../common/common.h"
 #include "stdlib.h"
 #include <stdint.h>
 

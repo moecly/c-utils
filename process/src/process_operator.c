@@ -4,7 +4,7 @@
  * @author moecly
  */
 
-#include "process_operator.h"
+#include "../inc/process_operator.h"
 #include <sys/wait.h>
 #include <unistd.h>
 

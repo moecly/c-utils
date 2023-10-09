@@ -7,7 +7,7 @@
 #ifndef __PROCESS_OPERATOR_H_
 #define __PROCESS_OPERATOR_H_
 
-#include "c-utils/c-utils.h"
+#include "../../common/inc/common.h"
 #include <signal.h>
 
 /**

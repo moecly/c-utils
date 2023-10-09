@@ -4,7 +4,7 @@
  * @author: moecly
  */
 
-#include "log_msg.h"
+#include "../inc/log_msg.h"
 
 /* 默认日志输出级别为 DEBUG */
 static LOG_LEVEL level = LOG_ERROR;

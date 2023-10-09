@@ -4,7 +4,8 @@
  * @author moecly
  */
 
-#include "list.h"
+#include "../inc/list.h"
+#include "../../common/inc/common.h"
 #include <stdint.h>
 
 /**

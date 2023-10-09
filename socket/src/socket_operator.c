@@ -4,7 +4,7 @@
  * @author moecly
  */
 
-#include "socket_operator.h"
+#include "../inc/socket_operator.h"
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>

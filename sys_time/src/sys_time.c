@@ -4,7 +4,7 @@
  * @author: moecly
  */
 
-#include "sys_time.h"
+#include "../inc/sys_time.h"
 
 static time_t currentTime;
 static struct tm *localTime;

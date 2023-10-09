@@ -4,7 +4,7 @@
  * @author moecly
  */
 
-#include "common.h"
+#include "../inc/common.h"
 
 /**
  * @brief 验证指针是否有效。
