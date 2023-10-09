@@ -42,14 +42,15 @@
        array##_index < array##_length; array##_index++)
 
 typedef enum {
-  ret_ok,
+  ret_ok = 0,
   ret_err,
+  ret_null_pointer,
 } ret_val;
 
 /**
  * @brief 验证指针是否有效。
  * @param ptr 待验证的指针。
- * @return 若指针无效，返回-1；否则返回0。
+ * @return 若指针无效，返回ret_null_pointer；否则返回ret_ok。
  */
 ret_val validate_pointer(void *ptr);
 
