@@ -42,7 +42,8 @@ extern "C" {
 #endif
 
 #ifdef USE_CRYPTO
-#include "crypto/inc/crypto_operator.h" /* 引用进程管理者模块 */
+#include "crypto/inc/crypto_openssl.h"  /* 引用加密 */
+#include "crypto/inc/crypto_operator.h" /* 引用加密 */
 #endif
 
 #ifdef __cplusplus
