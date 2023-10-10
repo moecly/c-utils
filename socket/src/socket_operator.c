@@ -285,9 +285,22 @@ ret_val socket_server_close(socket_server_operator *opr) {
  * @param info Pointer to the socket_info structure.
  * @param buf Pointer to the buffer to store received data.
  * @param len Maximum length of data to receive.
+ * @param time_s timeout second.
+ * @param time_us timeout us.
  * @return Returns the number of bytes received on success, or -1 on failure.
  */
-ssize_t socket_recv_block(socket_info *info, void *buf, ssize_t len) {
+ssize_t socket_recv_block(socket_info *info, void *buf, ssize_t len, int time_s,
+                          int time_us) {
+  struct timeval timeout;
+  int ret;
+
+  timeout.tv_usec = time_us;
+  timeout.tv_sec = time_s;
+  ret = setsockopt(info->sockfd, SOL_SOCKET, SO_RCVTIMEO, &timeout,
+                   sizeof(timeout));
+  if (ret)
+    return -1;
+
   return recv(info->sockfd, buf, len, 0);
 }
 
@@ -314,9 +327,22 @@ ssize_t socket_recv_unblock(socket_info *info, void *buf, ssize_t len) {
  * @param info Pointer to the socket_info structure.
  * @param buf Pointer to the data to send.
  * @param len Length of the data to send.
+ * @param time_s timeout second.
+ * @param time_us timeout us.
  * @return Returns the number of bytes sent on success, or -1 on failure.
  */
-ssize_t socket_send_block(socket_info *info, const void *buf, ssize_t len) {
+ssize_t socket_send_block(socket_info *info, const void *buf, ssize_t len,
+                          int time_s, int time_us) {
+  struct timeval timeout;
+  int ret;
+
+  timeout.tv_usec = time_us;
+  timeout.tv_sec = time_s;
+  ret = setsockopt(info->sockfd, SOL_SOCKET, SO_SNDTIMEO, &timeout,
+                   sizeof(timeout));
+  if (ret)
+    return -1;
+
   return send(info->sockfd, buf, len, 0);
 }
 
