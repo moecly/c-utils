@@ -1,6 +1,21 @@
+/**
+ * @file crypto_openssl.c
+ * @brief OpenSSL-based Crypto Module Implementation File
+ * @author moecly
+ */
+
 #include "../inc/crypto_openssl.h"
 #include "c-utils/common/inc/common.h"
 
+/**
+ * @brief Select the OpenSSL digest method based on the crypto_type.
+ *
+ * This function selects the OpenSSL digest method based on the provided
+ * crypto_type.
+ *
+ * @param type The crypto_type to select the digest method for.
+ * @return Returns the selected EVP_MD method or NULL if not found.
+ */
 static EVP_MD *select_crypto_type(crypto_type type) {
   switch (type) {
 
@@ -80,6 +95,16 @@ static EVP_MD *select_crypto_type(crypto_type type) {
   return NULL;
 }
 
+/**
+ * @brief Initialize the OpenSSL crypto operator.
+ *
+ * This function initializes the OpenSSL crypto operator and selects the digest
+ * method.
+ *
+ * @param opr Pointer to the crypto operator to be initialized.
+ * @param type The crypto_type to use for initialization.
+ * @return Returns ret_ok on success, ret_err on failure.
+ */
 static int openssl_crypto_init_handler(struct crypto_operator *opr,
                                        crypto_type type) {
   crypto_info *info = &opr->info;
@@ -98,6 +123,16 @@ static int openssl_crypto_init_handler(struct crypto_operator *opr,
   return ret_ok;
 }
 
+/**
+ * @brief Update the OpenSSL crypto operator with data.
+ *
+ * This function updates the OpenSSL crypto operator with data.
+ *
+ * @param opr Pointer to the crypto operator.
+ * @param buf Pointer to the data buffer.
+ * @param len Length of the data buffer.
+ * @return Returns ret_ok on success, ret_err on failure.
+ */
 static int openssl_crypto_update_handler(struct crypto_operator *opr, void *buf,
                                          int len) {
   crypto_info *info = &opr->info;
@@ -106,6 +141,17 @@ static int openssl_crypto_update_handler(struct crypto_operator *opr, void *buf,
   return ret_ok;
 }
 
+/**
+ * @brief Finalize the OpenSSL crypto operator and get the hash.
+ *
+ * This function finalizes the OpenSSL crypto operator and retrieves the hash
+ * and size.
+ *
+ * @param opr Pointer to the crypto operator.
+ * @param hash Pointer to the hash buffer.
+ * @param size Pointer to the size of the hash.
+ * @return Returns ret_ok on success, ret_err on failure.
+ */
 static int openssl_crypto_final_handler(struct crypto_operator *opr,
                                         unsigned char *hash, int *size) {
   crypto_info *info = &opr->info;
@@ -114,12 +160,29 @@ static int openssl_crypto_final_handler(struct crypto_operator *opr,
   return ret_ok;
 }
 
+/**
+ * @brief Destroy the OpenSSL crypto operator.
+ *
+ * This function destroys the OpenSSL crypto operator and frees resources.
+ *
+ * @param opr Pointer to the crypto operator to be destroyed.
+ * @return Returns ret_ok on success, ret_err on failure.
+ */
 static int openssl_crypto_destroy_handler(struct crypto_operator *opr) {
   crypto_info *info = &opr->info;
   EVP_MD_CTX_free(info->mdctx);
   return ret_ok;
 }
 
+/**
+ * @brief Create an OpenSSL-based crypto operator.
+ *
+ * This function initializes an OpenSSL-based crypto operator and associates it
+ * with the provided `crypto_operator` structure.
+ *
+ * @param opr Pointer to the crypto operator to be initialized with OpenSSL.
+ * @return Returns ret_ok on success, ret_err on failure.
+ */
 ret_val create_openssl_crypto_opr(crypto_operator *opr) {
   opr->init = openssl_crypto_init_handler;
   opr->update = openssl_crypto_update_handler;
