@@ -4,21 +4,21 @@
 ```
 c-utils
     |
-    |______lib # 需要的动态库
+    |______lib                      # 需要的动态库
     |
-    |______common   # 通用库
+    |______common                   # 通用库
     |
-    |______crypto   # 加密库(openssl)
+    |______crypto                   # 加密库(openssl)
     |
-    |______list   # 链表库
+    |______list                     # 链表库
     |
-    |______log_msg   # 日志库
+    |______log_msg                  # 日志库
     |
-    |______process   # 进程管理库
+    |______process                  # 进程管理库
     |
-    |______socket   # socket库
+    |______socket                   # socket库
     |
-    |______str_util   # 字符串工具库
+    |______str_util                 # 字符串工具库
     |
-    |______sys_time   # Linux系统时间库
+    |______sys_time                 # Linux系统时间库
 ```
