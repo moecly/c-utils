@@ -29,7 +29,7 @@
 /* 定义一个宏，用于计算可变参数的长度 */
 #ifndef NUM_ARGS
 #define NUM_ARGS(...) (sizeof((int[]){__VA_ARGS__}) / sizeof(int))
-#endif // !ARRAY_LEN
+#endif // !NUM_ARGS
   
 /* 定义一个宏，用于计算数组的长度 */
 #ifndef ARRAY_LEN
