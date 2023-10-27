@@ -34,7 +34,7 @@ extern "C" {
 #endif
 
 #ifdef USE_PROCESS
-#include "process/inc/process_operator.h" /* 引用进程管理者模块 */
+#include "process/inc/process_operations.h" /* 引用进程管理者模块 */
 #endif
 
 #ifdef USE_SOCKET
