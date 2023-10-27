@@ -55,6 +55,13 @@ typedef struct process_operations {
 ret_val process_ops_init(void);
 
 /**
+ * @brief 重置进程操作
+ *
+ * @return 重置结果
+ */
+ret_val process_ops_reset(void);
+
+/**
  * @brief 设置进程的命令行参数
  *
  * @param info 进程信息结构体指针
