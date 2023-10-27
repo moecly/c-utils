@@ -7,7 +7,7 @@
 #ifndef __LINUX_PROCESS_OPERATIONS_
 #define __LINUX_PROCESS_OPERATIONS_
 
-#include "process_operations.h"
+#include "../../inc/process_operations.h"
 
 /**
  * @brief 初始化Linux进程操作
